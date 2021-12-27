@@ -50,6 +50,9 @@
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-body">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    @endif
                   <div class="user-profile">
                     <div class="row">
                       <div class="col-lg-4">

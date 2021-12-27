@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\Profile;
 use App\Http\Controllers\Portfolio\Portfolio;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,13 @@ Route::prefix('admin')->group(function () {
     //Banner
     Route::get('/banner',[BannerController::class, 'banner'])->name('banner')->middleware('authcheck');
     Route::post('/banner',[BannerController::class, 'banner_update'])->name('banner_update')->middleware('authcheck');
+    //About
+    Route::get('/about',[AboutController::class, 'about'])->name('about')->middleware('authcheck');
+    Route::post('/about',[AboutController::class, 'about_update'])->name('about_update')->middleware('authcheck');
+    //Skill
+    Route::get('/skill',[AboutController::class, 'skill'])->name('skill')->middleware('authcheck');
+    Route::post('/skill',[AboutController::class, 'skill_add'])->name('skill_add')->middleware('authcheck');
+    Route::get('/skill_delete/{number}',[AboutController::class,  'skill_delete'])->name('skill_delete')->middleware('authcheck');
 
 
 });
