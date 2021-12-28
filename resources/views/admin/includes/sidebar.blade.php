@@ -11,9 +11,9 @@
                 <li><a class="sidebar-sub-toggle"><i class="ti-bar-chart-alt"></i>  About  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="chart-morris.html">Skills</a></li>
+                        <li><a href="{{ route('skill') }}">Skills</a></li>
                         <li><a href="chartjs.html">Interest</a></li>
-                        <li><a href="chartist.html">Testimonials</a></li>
+                        <li><a href="{{ route('testimonial') }}">Testimonials</a></li>
                         <li><a href="chartist.html">Others</a></li>
                     </ul>
                 </li>

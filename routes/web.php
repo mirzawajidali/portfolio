@@ -43,6 +43,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/skill',[AboutController::class, 'skill'])->name('skill')->middleware('authcheck');
     Route::post('/skill',[AboutController::class, 'skill_add'])->name('skill_add')->middleware('authcheck');
     Route::get('/skill_delete/{number}',[AboutController::class,  'skill_delete'])->name('skill_delete')->middleware('authcheck');
-
+    //Testimonial
+    Route::get('/testimonial',[AboutController::class, 'testimonial'])->name('testimonial')->middleware('authcheck');
+    Route::post('/testimonial',[AboutController::class, 'testimonial_add'])->name('testimonial_add')->middleware('authcheck');
+    Route::get('/testimonial_delete/{number}',[AboutController::class,  'testimonial_delete'])->name('testimonial_delete')->middleware('authcheck');
 
 });

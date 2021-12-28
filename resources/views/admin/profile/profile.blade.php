@@ -75,21 +75,11 @@
                         <div class="user-skill">
                           <h4>Skill</h4>
                           <ul>
+                            @foreach ($skills as $skill)
                             <li>
-                              <a href="#">Branding</a>
+                              <a href="">{{ $skill->name }}</a>
                             </li>
-                            <li>
-                              <a href="#">UI/UX</a>
-                            </li>
-                            <li>
-                              <a href="#">Web Design</a>
-                            </li>
-                            <li>
-                              <a href="#">Wordpress</a>
-                            </li>
-                            <li>
-                              <a href="#">Magento</a>
-                            </li>
+                            @endforeach
                           </ul>
                         </div>
                       </div>
@@ -146,17 +136,6 @@
                                       <br>
                                        <button class="btn btn-primary btn-addon" type="submit"><i class="ti-save"></i>Save</button>
                                 </form>
-                              </div>
-                              <div class="basic-information">
-                                <h4>Basic information</h4>
-                                <div class="birthday-content">
-                                  <span class="contact-title">Birthday:</span>
-                                  <span class="birth-date">January 31, 1990 </span>
-                                </div>
-                                <div class="gender-content">
-                                  <span class="contact-title">Gender:</span>
-                                  <span class="gender">Male</span>
-                                </div>
                               </div>
                             </div>
                           </div>

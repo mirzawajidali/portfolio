@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class Profile extends Controller
     //profile
     public function profile(){
         $user = User::get()->first();
-        return view('admin.profile.profile',compact('user'));
+        $skills = Skill::get();
+        return view('admin.profile.profile',compact('user','skills'));
     }
     public function profile_update(Request $request){
         $request->validate([
