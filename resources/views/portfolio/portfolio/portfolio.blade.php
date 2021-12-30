@@ -26,7 +26,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('public/portfolio/assets/css/style.css')}}" rel="stylesheet">
-
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- =======================================================
   * Template Name: Personal - v4.7.0
   * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
@@ -40,8 +41,7 @@
   <!-- ======= Header ======= -->
   <header id="header">
     <div class="container">
-
-      <h1><a href="index.html">{{ $user['name'] }}</a></h1>
+      <h1><a href="{{ route('portfolio') }}">{{ $user['name'] }}</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
       <h2>I'm a passionate <span>{{ $banner['designation'] }}</span> from {{ $user['address'] }}</h2>
@@ -64,7 +64,19 @@
         <a href="{{ $user['instagram'] }}" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="{{ $user['linkedin'] }}" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
+        @error('name')
+        <div class="mr-5">
+           <h3 class=" text-warning">Sorry!</h3><p>Something went wrong!</p>
+        </div>
+        @enderror
 
+        @if (Session::has('success'))
+        <div class="my-3">
+            <div class="text-warning">You are message sended successfully!</div>
+            <div class="error-message"></div>
+            <div class="sent-message">{{ Session::get('success') }}</div>
+          </div>
+        @endif
     </div>
   </header><!-- End Header -->
 
@@ -379,54 +391,16 @@
       </div>
 
       <div class="row">
+        @foreach ($services as $service)
+
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
           <div class="icon-box">
-            <div class="icon"><i class="bx bxl-dribbble"></i></div>
-            <h4><a href="">Lorem Ipsum</a></h4>
-            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            <div class="icon"><i class="{{ $service->icon }}"></i></div>
+            <h4><a href="">{{ $service->title }}</a></h4>
+            <p>{{ $service->detail }}</p>
           </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-file"></i></div>
-            <h4><a href="">Sed ut perspiciatis</a></h4>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-tachometer"></i></div>
-            <h4><a href="">Magni Dolores</a></h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-world"></i></div>
-            <h4><a href="">Nemo Enim</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-slideshow"></i></div>
-            <h4><a href="">Dele cardo</a></h4>
-            <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-arch"></i></div>
-            <h4><a href="">Divera don</a></h4>
-            <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-          </div>
-        </div>
-
+        @endforeach
       </div>
 
     </div>
@@ -595,7 +569,6 @@
       </div>
 
       <div class="row mt-2">
-
         <div class="col-md-6 d-flex align-items-stretch">
           <div class="info-box">
             <i class="bx bx-map"></i>
@@ -609,11 +582,11 @@
             <i class="bx bx-share-alt"></i>
             <h3>Social Profiles</h3>
             <div class="social-links">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a href="{{ $user['twitter'] }}" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="{{ $user['facebook'] }}" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="{{ $user['instagram'] }}" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="" class="google-plus"><i class="bi bi-skype"></i></a>
+              <a href="{{ $user['likedin'] }}" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
@@ -622,37 +595,44 @@
           <div class="info-box">
             <i class="bx bx-envelope"></i>
             <h3>Email Me</h3>
-            <p>contact@example.com</p>
+            <p>{{ $about['email'] }}</p>
           </div>
         </div>
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
           <div class="info-box">
             <i class="bx bx-phone-call"></i>
             <h3>Call Me</h3>
-            <p>+1 5589 55488 55</p>
+            <p>{{ $about['phone'] }}</p>
           </div>
         </div>
       </div>
-
-      <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
+      <form action="{{ route('contact') }}" method="POST" class="php-email-form mt-4">
+        @csrf
         <div class="row">
           <div class="col-md-6 form-group">
-            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            @error('name')
+            <span>{{ $message }}
+            @enderror
+            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name">
           </div>
           <div class="col-md-6 form-group mt-3 mt-md-0">
-            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            @error('email')
+            {{ $message }}</span>
+            @enderror
+            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email">
           </div>
         </div>
         <div class="form-group mt-3">
-          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            @error('subject')
+            {{ $message }}</span>
+            @enderror
+          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
         </div>
         <div class="form-group mt-3">
-          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-        </div>
-        <div class="my-3">
-          <div class="loading">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message">Your message has been sent. Thank you!</div>
+            @error('message')
+            {{ $message }}</span>
+            @enderror
+          <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
         </div>
         <div class="text-center"><button type="submit">Send Message</button></div>
       </form>
@@ -675,7 +655,7 @@
   <script src="{{ asset('public/portfolio/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
   <script src="{{ asset('public/portfolio/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
   <script src="{{ asset('public/portfolio/assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
-  <script src="{{ asset('public/portfolio/assets/vendor/php-email-form/validate.js')}}"></script>
+  {{-- <script src="{{ asset('public/portfolio/assets/vendor/php-email-form/validate.js')}}"></script> --}}
 
   <!-- Template Main JS File -->
   <script src="{{ asset('public/portfolio/assets/js/main.js')}}"></script>

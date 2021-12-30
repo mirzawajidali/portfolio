@@ -17,6 +17,13 @@
                         <li><a href="chartist.html">Others</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ route('services') }}"><i class="ti-image"></i> Services </a></li>
+                <li><a href="{{ route('contacts') }}"><i class="ti-image"></i> Contacts </a></li>
+                <li><a class="sidebar-sub-toggle"><i class="ti-heart"></i> Icons <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                      <li><a href="{{ route('icons') }}">Themify</a></li>
+                    </ul>
+                  </li>
                 <li><a href="{{ route('logout') }}"><i class="ti-close"></i> Logout</a></li>
             </ul>
         </div>

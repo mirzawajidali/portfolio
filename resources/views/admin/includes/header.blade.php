@@ -82,67 +82,26 @@
                             <i class="ti-email"></i>
                             <div class="drop-down dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-content-heading">
-                                    <span class="text-left">2 New Messages</span>
+                                    <span class="text-left">All Messages</span>
                                     <a href="email.html">
                                         <i class="ti-pencil-alt pull-right"></i>
                                     </a>
                                 </div>
                                 <div class="dropdown-content-body">
                                     <ul>
+                                        @foreach ($message as $msg)
                                         <li class="notification-unread">
                                             <a href="#">
-                                                <img class="pull-left m-r-10 avatar-img"
-                                                    src="assets/images/avatar/1.jpg" alt="" />
                                                 <div class="notification-content">
-                                                    <small class="notification-timestamp pull-right">02:34
-                                                        PM</small>
-                                                    <div class="notification-heading">Michael Qin</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                        ...</div>
+                                                    <small class="notification-timestamp pull-right">{{ $msg->created_at->diffForHumans() }}</small>
+                                                    <div class="notification-heading">{{ $msg->name }}</div>
+                                                    <div class="notification-text">{{ $msg->message }}</div>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li class="notification-unread">
-                                            <a href="#">
-                                                <img class="pull-left m-r-10 avatar-img"
-                                                    src="assets/images/avatar/2.jpg" alt="" />
-                                                <div class="notification-content">
-                                                    <small class="notification-timestamp pull-right">02:34
-                                                        PM</small>
-                                                    <div class="notification-heading">Mr. John</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                        ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <img class="pull-left m-r-10 avatar-img"
-                                                    src="assets/images/avatar/3.jpg" alt="" />
-                                                <div class="notification-content">
-                                                    <small class="notification-timestamp pull-right">02:34
-                                                        PM</small>
-                                                    <div class="notification-heading">Michael Qin</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                        ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <img class="pull-left m-r-10 avatar-img"
-                                                    src="assets/images/avatar/2.jpg" alt="" />
-                                                <div class="notification-content">
-                                                    <small class="notification-timestamp pull-right">02:34
-                                                        PM</small>
-                                                    <div class="notification-heading">Mr. John</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                        ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        @endforeach
                                         <li class="text-center">
-                                            <a href="#" class="more-link">See All</a>
+                                            <a href="{{ route('contacts') }}" class="btn btn-sm btn-primary">See All</a>
                                         </li>
                                     </ul>
                                 </div>

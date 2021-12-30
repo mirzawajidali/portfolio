@@ -3,8 +3,11 @@
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\Admin\Icons;
 use App\Http\Controllers\Admin\Profile;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Portfolio\Portfolio;
 use App\Models\Skill;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 //Portfolio Routes
 Route::get('/',[Portfolio::class, 'portfolio'])->name('portfolio');
+Route::post('/contact',[Portfolio::class,'contact'])->name('contact');
 
 //Admin Routes
 Route::prefix('admin')->group(function () {
@@ -48,4 +52,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/testimonial',[AboutController::class, 'testimonial_add'])->name('testimonial_add')->middleware('authcheck');
     Route::get('/testimonial_delete/{number}',[AboutController::class,  'testimonial_delete'])->name('testimonial_delete')->middleware('authcheck');
 
+    //Contacts
+    Route::get('/contacts',[ContactController::class, 'contacts'])->name('contacts')->middleware('authcheck');
+    //Services
+    Route::get('/services',[ServiceController::class, 'services'])->name('services')->middleware('authcheck');
+    Route::post('/services',[ServiceController::class, 'service_add'])->name('service_add')->middleware('authcheck');
+    Route::get('/service_delete/{number}',[ServiceController::class,'service_delete'])->name('service_delete')->middleware('authcheck');
+    //Icons
+    Route::get('/icons',[Icons::class,'icons'])->name('icons')->middleware('authcheck');
 });
